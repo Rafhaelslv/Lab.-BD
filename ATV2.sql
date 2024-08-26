@@ -137,7 +137,7 @@ WHERE nota_minima_disciplina > 5
 
 --3). Queremos selecionar todas disciplinas que tenham nota mínima entre 3 (três) e 5 (cinco).
 SELECT * FROM TB_DISCIPLINA
-WHERE nota_minima_disciplina >3 AND nota_minima_disciplina <5
+WHERE nota_minima_disciplina >=3 AND nota_minima_disciplina <=5
 
 --B-    Exercícios de SELECT (Ordenando e agrupando dados)
 
