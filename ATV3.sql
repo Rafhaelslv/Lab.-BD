@@ -37,12 +37,12 @@ CREATE TABLE embarq
 INSERT INTO peca (codPeca, nomePeca, corPeca, pesoPeca, cidadePeca) VALUES
 ('P1', 'Eixo', 'Cinza', 10, 'Poa'),
 ('P2', 'Rolamento', 'Preto', 16, 'Rio'),
-('P3', 'Mancal', 'Verde', 30, 'São Paulo');
+('P3', 'Mancal', 'Verde', 30, 'SÃ£o Paulo');
  
 INSERT INTO fornecedor (codFornecedor, nomeFornecedor, statusFornecedor, cidadeFornecedor) VALUES
-('F1', 'Silva', 5, 'São Paulo'),
+('F1', 'Silva', 5, 'SÃ£o Paulo'),
 ('F2', 'Souza', 10, 'Rio'),
-('F3', 'Alvares', 5, 'São Paulo'),
+('F3', 'Alvares', 5, 'SÃ£o Paulo'),
 ('F4', 'Tavares', 8, 'Rio');
  
  
@@ -53,20 +53,21 @@ INSERT INTO embarq(codPeca, codFornecedor, qtdEmbarque) VALUES
 ('P2', 'F1', 300),
 ('P2', 'F4', 350);
 
---1) Obter o número de fornecedores na base de dados
+--1) Obter o nÃºmero de fornecedores na base de dados
 SELECT COUNT (codFornecedor) AS N_Fornecedores
 FROM fornecedor
 
---2) Obter o número de cidades em que há fornecedores
+--2) Obter o nÃºmero de cidades em que hÃ¡ fornecedores
 SELECT COUNT (DISTINCT codFornecedor ) AS N_cidade
 FROM fornecedor
 
---3) Obter o número de fornecedores com cidade informada
+--3) Obter o nÃºmero de fornecedores com cidade informada
+SELECT COUNT (codFornecedor ) AS N_cidade
+FROM fornecedor
 
-
---4) Obter a quantidade máxima embarcada
---5) Obter o número de embarques de cada fornecedor
---6) Obter o número de embarques de quantidade maior que 300 de cadafornecedor
---7) Obter a quantidade total embarcada de peças de cor cinza para cada fornecedor
---8) Obter o quantidade total embarcada de peças para cada fornecedor. Exibir o resultado por ordem descendente de quantidade total embarcada.
---9) Obter os códigos de fornecedores que tenham embarques de mais de 500 unidades de peças cinzas, junto com a quantidade de embarques de peças cinzas
+--4) Obter a quantidade mÃ¡xima embarcada
+--5) Obter o nÃºmero de embarques de cada fornecedor
+--6) Obter o nÃºmero de embarques de quantidade maior que 300 de cadafornecedor
+--7) Obter a quantidade total embarcada de peÃ§as de cor cinza para cada fornecedor
+--8) Obter o quantidade total embarcada de peÃ§as para cada fornecedor. Exibir o resultado por ordem descendente de quantidade total embarcada.
+--9) Obter os cÃ³digos de fornecedores que tenham embarques de mais de 500 unidades de peÃ§as cinzas, junto com a quantidade de embarques de peÃ§as cinzas
