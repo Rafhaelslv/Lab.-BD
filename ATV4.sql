@@ -106,12 +106,70 @@ GROUP BY e.codFornecedor
 --Considerando a Lista de Exercícios da Aula de Funções Agregadas, criar a seguinte Stored Procedure:
 
 --1- Procedure para Inserir um registro na Tabela Peça, usando parâmetros;
-CREATE PROCEDURE p.peca (
-IN codPeca CHAR(2), 
-IN nomePeca VARCHAR(50), 
-corPeca, pesoPeca 
-cidadePeca)
 
+CREATE PROCEDURE InserirPeca
+    @CodPeca CHAR(2),
+    @NomePeca VARCHAR(50),
+    @CorPeca VARCHAR(15),
+    @PesoPeca SMALLINT,
+    @CidadePeca VARCHAR(100)
+AS
+BEGIN
+    
+    INSERT INTO peca (CodPeca, NomePeca, CorPeca, PesoPeca, CidadePeca)
+    VALUES (@CodPeca, @NomePeca, @CorPeca, @PesoPeca, @CidadePeca);
+    
+END;
+GO
+ 
+--1.2. Usando a procedure InserirPeca
+EXEC InserirPeca
+    @CodPeca = 'P5',
+    @NomePeca = 'Bomba',
+    @CorPeca = 'Vermelha',
+    @PesoPeca = 18,
+    @CidadePeca = 'Itaqua';
+ 
+SELECT * FROM peca;
 
 
 --2- Procedure para Inserir 5000 registros distintos na Tabela Peça;
+CREATE PROCEDURE Inserir5000Pecas
+AS
+BEGIN
+    DECLARE @contador INT = 1;
+    DECLARE @CodPeca CHAR(2);
+    DECLARE @NomePeca VARCHAR(50);
+    DECLARE @CorPeca VARCHAR(15);
+    DECLARE @PesoPeca SMALLINT;
+    DECLARE @CidadePeca VARCHAR(100);
+ 
+    
+    WHILE @contador <= 5000
+    BEGIN
+        
+        SET @CodPeca = RIGHT('P' + CAST(@contador AS VARCHAR(5)), 2);
+        SET @NomePeca = 'Peca' + CAST(@contador AS VARCHAR(5));
+        SET @CorPeca = CASE WHEN @contador % 3 = 0 THEN 'Preto'
+                            WHEN @contador % 3 = 1 THEN 'Preto'
+                            ELSE 'Verde' END;
+        SET @PesoPeca = @contador % 100 + 1; -- Gera pesos entre 1 e 100
+        SET @CidadePeca = CASE WHEN @contador % 2 = 0 THEN 'São Paulo' ELSE 'Rio' END;
+ 
+        
+        INSERT INTO peca (CodPeca, NomePeca, CorPeca, PesoPeca, CidadePeca)
+        VALUES (@CodPeca, @NomePeca, @CorPeca, @PesoPeca, @CidadePeca);
+ 
+        
+        SET @contador = @contador + 1;
+    END;
+ 
+    
+    PRINT '5000 registros foram inseridos com sucesso na tabela Peca';
+END;
+GO
+ 
+
+EXEC Inserir5000Pecas;
+ 
+SELECT * FROM peca;
